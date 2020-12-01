@@ -1,0 +1,75 @@
+<html>
+<head>
+<style>
+*{
+    user-select: none;
+}
+body{
+    margin: 0;
+    background: black;
+}
+button{
+    position: absolute;
+}
+.score-wrapper{
+    position:fixed;
+    margin: 5px;
+    color: white;
+}
+#modal{
+    width:20%;
+    font-family: sans-serif;
+    background: white;
+    border-radius: 1rem;
+    padding: 3rem;
+    position: fixed;
+    display: block;
+    left:50%;
+    top: 50%;
+    transform:translate(-50%, -50%);
+    text-align: center;
+    z-index: 1000;
+}
+.start-game{
+    position: relative;
+    padding: 1rem;
+    width:60%;
+    color: white;
+    font-weight: bold;
+    background: deepskyblue;
+    border-radius: 10px;
+    border-color: deepskyblue;
+}
+.start-game:hover{
+    background-color: rgb(8, 152, 248);
+}
+</style>
+</head>
+
+<body>
+    <audio id="bgm" loop>
+        <source src="sound/TranceGlitch2.ogg"> 
+        <source src="sound/Dead2.ogg"> 
+    </audio>
+    <span class="score-wrapper">Score: <span></span> <b><span class="score">0</span></b></span>
+    <canvas></canvas>
+    
+    <div id="modal">
+        <h1><span id="final-score">0</span></h1>
+        <p style="margin-top: -10px; margin-bottom:2rem;">Points</p>
+        <button class="start-game" id="start-game">Start Game</button>
+    </div>
+    
+    <audio id="hitmarker">
+        <source src="sound/hitmarker_2.mp3">
+    </audio>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js" integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ==" crossorigin="anonymous"></script>
+<script src="particleController.js"></script>
+<script src="projectileController.js"></script>
+<script src="playerController.js"></script>
+<script src="enemyController.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
