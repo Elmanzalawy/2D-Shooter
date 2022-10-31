@@ -150,7 +150,7 @@ function animate(){
 startGameBtn.addEventListener('click', function(){
     init();
     animate();
-    spawnEnemiesInterval = setInterval(spawnEnemies, 1000);
+    spawnEnemiesInterval = setInterval(spawnEnemies, 800);
     modal.style.display = 'none';
     scoreDisplay.innerHTML = 0;
     finalScoreDisplay.innerHTML = 0;
