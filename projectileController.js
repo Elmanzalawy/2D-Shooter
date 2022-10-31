@@ -33,6 +33,7 @@ function fireProjectile(y, x){
         const projectile = new Projectile(x0,y0, 2, 'red', velocity);
         setTimeout(() => { //we use setTimeOut to prevent the frame stuttering when deleting an array item
             projectiles.push(projectile);
+            shootSfx.play();
         }, 1);
         // console.log(projectiles)
     }
@@ -42,7 +43,6 @@ function fireProjectile(y, x){
 function projectileCollission(projectile, enemy){
 
         
-        console.log(enemies);
         onHitAudio.play();
         //create splash particles
         for(let i=0; i<enemy.radius * 2; i++){  //how many particles based on enemy radius

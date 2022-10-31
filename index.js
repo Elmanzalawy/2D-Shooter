@@ -18,6 +18,9 @@ const finalScoreDisplay = document.querySelector('#final-score');
 const startGameBtn = document.querySelector('#start-game');
 const modal = document.querySelector('#modal');
 
+// shoot SFX
+const shootSfx = document.querySelector('#shootSfx');
+
 //on-hit audio
 const onHitAudio = document.querySelector('#hitmarker');
 //background music
@@ -30,12 +33,15 @@ let enemies = [];  //array to store enemy objects
 let particles = [];  //array to store particles objects
 let spawnEnemiesInterval;
 
+let gameOver = true;
+
 function init(){
     player = new Player(x0, y0, 15, 'white');
     projectiles = [];
     enemies = [];
     particles = [];
     score = 0;
+    gameOver = false;
 }
 function spawnEnemies(){
 
@@ -101,14 +107,16 @@ function animate(){
 
         //if enemy hits player, stop the game at current frame
         const dist = Math.hypot(player.x - enemy.x, player.y - enemy.y);
-        // if(dist - enemy.radius - player.radius < 1){
-        //     //GAME OVER
-        //     cancelAnimationFrame(animationId);
-        //     modal.style.display = 'block';
-        //     finalScoreDisplay.innerHTML = score;
-        //     scoreDisplay.style.display = 'none';
-        //     clearInterval(spawnEnemiesInterval); //prevents more enemies from spawning while modal is open
-        // }
+        if(dist - enemy.radius - player.radius < 1){
+            //GAME OVER
+            cancelAnimationFrame(animationId);
+            modal.style.display = 'block';
+            finalScoreDisplay.innerHTML = score;
+            scoreDisplay.style.display = 'none';
+            clearInterval(spawnEnemiesInterval); //prevents more enemies from spawning while modal is open
+            gameOver = true;
+            bgm.pause();
+        }
 
         //PROJECTILES LOOP
         projectiles.forEach((projectile) => {     
@@ -134,8 +142,9 @@ function animate(){
 
     //create projectiles on mouse click
     window.addEventListener('mousedown', function(event){
-        fireProjectile(event.clientY, event.clientX);
-
+        if(!gameOver){
+            fireProjectile(event.clientY, event.clientX);
+        }
     });
 
 startGameBtn.addEventListener('click', function(){
@@ -148,8 +157,5 @@ startGameBtn.addEventListener('click', function(){
     scoreDisplay.style.display = 'inline';
 
     //start background music
-    // bgm.play();
-    
-    
-
+    bgm.play();
 });
